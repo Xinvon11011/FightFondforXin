@@ -1,0 +1,90 @@
+/* General Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #0b1d36; /* Dark blue cosmic background */
+    color: #f0f0f0; /* Light color for text */
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    background-color: #1b263b; /* Darker space color for content area */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    max-width: 80%;
+    border: 2px solid #3a506b; /* Space-themed border */
+}
+
+/* Styling for form elements */
+input[type="file"], textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: none;
+    background-color: #243b55; /* Dark cosmic blue for inputs */
+    color: #ffffff;
+}
+
+textarea {
+    resize: none;
+    height: 120px;
+}
+
+/* Buttons */
+button {
+    padding: 10px 20px;
+    margin-right: 10px;
+    background-color: #3a506b; /* Space blue */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #f0f0f0;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #5bc0be; /* Galaxy teal on hover */
+}
+
+button:active {
+    background-color: #0b3d4e; /* Darker shade on click */
+}
+
+/* Canvas Styling */
+canvas {
+    background-color: #0d1b2a; /* Deep space background */
+    border: 2px solid #3a506b; /* Stylish cosmic border */
+    display: block;
+    margin: 20px 0;
+}
+
+/* Controls */
+#controls {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+#controls button {
+    flex: 1;
+    margin-right: 5px;
+}
+
+/* Header and Titles */
+h1 {
+    color: #d4af37; /* Gold-like color for futuristic feel */
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h2 {
+    color: #f0f0f0;
+    margin-bottom: 10px;
+    text-align: left;
+}
