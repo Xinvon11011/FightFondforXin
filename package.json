@@ -1,0 +1,22 @@
+{
+    "name": "realxin-ai-floorplan-generator",
+    "version": "1.0.0",
+    "description": "An AI-powered floorplan generator using TensorFlow.js and ML5.js.",
+    "main": "index.js",
+    "scripts": {
+      "start": "node index.js",
+      "build": "npm run build",  
+      "test": "npm run test"     
+    },
+    "dependencies": {
+      "@tensorflow/tfjs": "^3.9.0",
+      "ml5": "^0.6.0",
+      "express": "^4.17.1" 
+    },
+    "devDependencies": {
+      "nodemon": "^2.0.7" 
+    },
+    "author": "Your Name",
+    "license": "MIT"
+  }
+  

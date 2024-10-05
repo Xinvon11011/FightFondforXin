@@ -1,22 +1,18 @@
-# Byte-compiled / optimized / DLL files
-__pycache__/
-*.py[cod]
-*.so
-*.dylib
-
-# Flask environment
-env/
-venv/
-instance/
-*.sqlite3
-
-# TensorFlow models (if models are too large to store in Git)
-models/
-*.h5
-*.ckpt
-*.pb
-
-# Node modules (for JavaScript packages, if using Node.js)
+# Ignore node_modules
 node_modules/
-npm-debug.log
-yarn-error.log
+
+# Ignore package-lock.json if necessary
+package-lock.json
+
+# Ignore log files
+*.log
+
+# Ignore temporary files
+.DS_Store
+
+# Ignore build files (if using a build process)
+dist/
+build/
+
+# Ignore local environment variables
+.env

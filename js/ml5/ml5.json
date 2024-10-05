@@ -1,9 +1,0 @@
-{
-    "model": "This is the ML5 model for shape and object recognition",
-    "type": "Pretrained MobileNet",
-    "config": {
-        "inputShape": [224, 224, 3],
-        "outputUnits": 1000,
-        "activation": "softmax"
-    }
-}
