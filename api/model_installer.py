@@ -2,7 +2,7 @@ import os
 import urllib.request
 
 # TensorFlow model URL (Replace with actual model URL if hosted online)
-model_url = "https://example.com/path-to-your-model/model.json"
+model_url = "Xinvon11011.github.io/js/tensorflow/tensorflow_model.json"
 
 # Model storage path
 model_path = "models/model.json"
