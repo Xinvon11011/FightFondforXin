@@ -1,39 +1,21 @@
-# Teacher AI: Oversees the operations of all students
-from student1 import classify_image
-from student2 import translate_labels
-from student3 import send_description_data
-from student4 import cache_result, load_cached_result
-from student5 import prepare_results_for_download
-from student6 import display_floorplan, report_error
+from flask import Flask, jsonify
+import pandas as pd
+from student1 import process_student1  # Import students
+import tensorflow as tf
 
-def process_images_and_generate_floorplan(image_path, description):
-    try:
-        # Student 1: Classify image
-        classification = classify_image(image_path)
-        print(f"Image classified as: {classification}")
+app = Flask(__name__)
 
-        # Student 2: Translate classification labels
-        translated_labels = translate_labels(classification)
-        print(f"Translated labels: {translated_labels}")
+@app.route('/run_all_students', methods=['POST'])
+def process_all_students():
+    # Example: Combine results from all students
+    student1_result = process_student1()
 
-        # Student 3: Generate floorplan based on description
-        floorplan = send_description_data(description)
-        print(f"Floorplan generated: {floorplan}")
+    # Load a model (TensorFlow) and make predictions if needed
+    model = tf.keras.models.load_model("path_to_your_model")
+    additional_results = model.predict([...])  # Use actual input here
 
-        # Student 4: Cache the floorplan result
-        cache_result(floorplan)
+    # Return combined results
+    return jsonify({"student1": student1_result, "additional_results": additional_results})
 
-        # Student 5: Prepare results for download
-        downloadable_data = prepare_results_for_download([classification])
-        print("Downloadable data prepared.")
-
-        # Student 6: Display the floorplan
-        display_floorplan(floorplan)
-
-    except Exception as e:
-        # Student 6: Report errors if any step fails
-        report_error(str(e))
-
-# Teacher overseeing the whole process
-if __name__ == "__main__":
-    process_images_and_generate_floorplan("house_image.jpg", "This is a modern house.")
+if __name__ == '__main__':
+    app.run(debug=True)

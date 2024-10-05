@@ -1,11 +1,24 @@
-# Student 5: Waits for TensorFlow results and prepares them for download
-def prepare_results_for_download(results):
-    # Convert TensorFlow results into a downloadable format (e.g., CSV, JSON)
-    downloadable_results = convert_to_csv(results)
-    return downloadable_results
+from flask import Flask, request, jsonify
+import pandas as pd
 
-def convert_to_csv(results):
-    csv_data = "Label, Confidence\n"
-    for result in results:
-        csv_data += f"{result['label']}, {result['confidence']}\n"
-    return csv_data
+app = Flask(__name__)
+
+@app.route('/student5', methods=['POST'])
+def add_text_to_floorplan():
+    # Example: Receive floorplan data
+    data = request.get_json()
+    floorplan = data.get('floorplan', '')
+    labels = data.get('labels', [])
+
+    # Pandas example: Process the labels (dummy logic)
+    df = pd.DataFrame(labels, columns=['label', 'x', 'y'])
+
+    # Add labels to floorplan (dummy logic)
+    for label in labels:
+        # Insert text into the floorplan (real implementation needed)
+        print(f"Adding {label['text']} at position ({label['x']}, {label['y']})")
+
+    return jsonify({"status": "labels added", "floorplan": floorplan})
+
+if __name__ == '__main__':
+    app.run(debug=True)
