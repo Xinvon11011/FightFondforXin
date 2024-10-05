@@ -1,100 +1,70 @@
-// Get elements by their IDs
-const imageUpload = document.getElementById('imageUpload');
-const descriptionArea = document.getElementById('descriptionArea');
-const imageCanvas = document.getElementById('imageCanvas');
-const svgCanvas = document.getElementById('svgCanvas');
-const startCrackingButton = document.getElementById('startCracking');
-const zoomInButton = document.getElementById('zoomIn');
-const zoomOutButton = document.getElementById('zoomOut');
-const downloadButton = document.getElementById('download');
-const previewButton = document.getElementById('preview');
-const deleteImageButton = document.getElementById('deleteImage');
+// JavaScript Logic for handling image upload, floorplan generation, and result display
 
-// Set canvas dimensions and border properties directly if not done in CSS
-imageCanvas.width = 800;
-imageCanvas.height = 600;
-imageCanvas.style.border = "1px solid black";
-svgCanvas.width = 800;
-svgCanvas.height = 600;
-svgCanvas.style.border = "1px solid black";
+document.getElementById('startCracking').addEventListener('click', function () {
+    const description = document.getElementById('houseDescription').value;
+    const images = document.getElementById('imageUpload').files;
 
-// Variables for zoom functionality
-let scale = 1;
-let img = null;  // Store the current image
-let ctx = imageCanvas.getContext('2d');
-
-// Image Upload Handling
-imageUpload.addEventListener('change', function(event) {
-    const files = event.target.files;
-    if (files && files.length > 0) {
-        handleImageUpload(files[0]);  // Handling the first image for now
-    }
-});
-
-// Function to handle image upload
-function handleImageUpload(file) {
-    img = new Image();
-    img.src = URL.createObjectURL(file);  // Convert file to object URL
-    img.onload = () => {
-        drawImage();  // Draw image when it's loaded
-    };
-}
-
-// Function to draw image on canvas
-function drawImage() {
-    ctx.clearRect(0, 0, imageCanvas.width, imageCanvas.height);  // Clear the canvas
-    ctx.drawImage(img, 0, 0, imageCanvas.width * scale, imageCanvas.height * scale);  // Draw with scaling
-}
-
-// Start Cracking (Processing)
-startCrackingButton.addEventListener('click', function() {
-    const description = descriptionArea.value;
-    if (!img || description.trim() === "") {
-        alert("Please upload an image and provide a description before starting.");
+    if (images.length === 0 || !description.trim()) {
+        alert("Please upload images and provide a house description.");
         return;
     }
-    // Simulate image and description processing
-    alert(`Processing: ${description} with image.`);
-    // Here you would call AI or TensorFlow processing functions
-    // After processing, the result would be displayed on svgCanvas
+
+    // Hide the upload section and start processing
+    document.querySelector('.upload-section').classList.add('hidden');
+    document.querySelector('.description-section').classList.add('hidden');
+
+    // Interact with the AI process (ML5 and TensorFlow students)
+    startCracking(description, images);
 });
 
-// Zoom In
-zoomInButton.addEventListener('click', function() {
-    scale += 0.1;  // Increase the scale factor
-    drawImage();   // Redraw the image with the new scale
-});
+async function startCracking(description, images) {
+    try {
+        // ML5 Student Process (Validate, Filter, Process Description)
+        const descriptionValid = validateDescription(description);
+        if (!descriptionValid) throw new Error("Description validation failed.");
 
-// Zoom Out
-zoomOutButton.addEventListener('click', function() {
-    if (scale > 0.1) {
-        scale -= 0.1;  // Decrease the scale factor
-        drawImage();   // Redraw the image with the new scale
+        const cleanedDescription = filterAndTranslateDescription(description);
+        const processedDescription = processDescriptionForTensorFlow(cleanedDescription);
+
+        // TensorFlow Process (Image handling, Prediction, SVG Generation)
+        const svgContent = await processImagesAndGenerateSVG(images, processedDescription);
+        if (!svgContent) throw new Error("Error generating floor plan.");
+
+        // Display the final SVG
+        displaySVG(svgContent);
+
+    } catch (error) {
+        displayError("Error generating floor plan: " + error.message);
     }
-});
+}
 
-// Download Image
-downloadButton.addEventListener('click', function() {
-    const dataUrl = imageCanvas.toDataURL();  // Convert canvas to image data URL
-    const link = document.createElement('a');  // Create an anchor element for download
-    link.href = dataUrl;
-    link.download = 'floorplan.png';  // Set download filename
-    link.click();  // Trigger the download
-});
+function validateDescription(description) {
+    return description.trim() !== '';
+}
 
-// Preview Floor Plan (Stub for AI Result)
-previewButton.addEventListener('click', function() {
-    const ctxSvg = svgCanvas.getContext('2d');
-    ctxSvg.clearRect(0, 0, svgCanvas.width, svgCanvas.height);  // Clear SVG canvas
-    // Simulate preview result (Here you can display actual AI-generated floorplan)
-    ctxSvg.fillStyle = "#000";
-    ctxSvg.fillRect(50, 50, 200, 100);  // Example rectangle representing the result
-    console.log("Previewing floor plan (This should be AI-generated).");
-});
+function filterAndTranslateDescription(description) {
+    // This would normally interact with Student2ML5's filtering and translation
+    return description.replace(/badword/g, "[censored]");
+}
 
-// Delete Image
-deleteImageButton.addEventListener('click', function() {
-    ctx.clearRect(0, 0, imageCanvas.width, imageCanvas.height);  // Clear the canvas
-    img = null;  // Reset image
-    alert("Image deleted.");
-});
+function processDescriptionForTensorFlow(description) {
+    return description;  // Simulating a processed description for TensorFlow
+}
+
+async function processImagesAndGenerateSVG(images, description) {
+    // Placeholder logic to process images using TensorFlow students
+    // This is where you would call TensorFlow JS to handle the predictions and SVG generation
+    return '<svg xmlns="http://www.w3.org/2000/svg" width="500" height="500"><rect x="50" y="50" width="400" height="400" style="fill:none;stroke:black;stroke-width:3"></rect></svg>';
+}
+
+function displaySVG(svgContent) {
+    const canvas = document.getElementById('resultCanvas');
+    canvas.innerHTML = svgContent;
+    document.getElementById('resultSection').classList.remove('hidden');
+}
+
+function displayError(errorMessage) {
+    const errorElement = document.getElementById('errorMessage');
+    errorElement.textContent = errorMessage;
+    errorElement.classList.remove('hidden');
+}
