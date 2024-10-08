@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Floorplan Generator</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- TensorFlow and ML5 libraries -->
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/ml5/0.6.0/ml5.min.js"></script>
+</head>
+<body>
+
+    <!-- Textarea to input description or instructions -->
+    <textarea id="description-textarea" placeholder="Enter house description..."></textarea>
+    
+    <!-- File upload for up to 55 images -->
+    <input type="file" id="image-upload" multiple accept="image/*" max="55" onchange="handleImageUpload(event)">
+
+    <!-- Control buttons -->
+    <div class="control-buttons">
+        <button onclick="handleStart()">Start</button>
+        <button onclick="handleReset()">Reset</button>
+        <button onclick="handleNext()">Next</button>
+        <button onclick="handlePrevious()">Previous</button>
+        <button onclick="zoomIn()">Zoom In</button>
+        <button onclick="zoomOut()">Zoom Out</button>
+        <button onclick="downloadCanvas()">Download</button>
+    </div>
+
+    <!-- Canvas to display generated or uploaded images (1280 x 720) -->
+    <canvas id="floorplan-canvas" width="1280" height="720"></canvas>
+
+    <!-- Dropdown for download format options -->
+    <select id="download-format">
+        <option value="png">.png</option>
+        <option value="jpeg">.jpeg</option>
+        <option value="bmp">.bmp</option>
+    </select>
+
+    <!-- Error log for TensorFlow and ML5 errors -->
+    <div id="error-log" class="error-log"></div>
+    <div id="ml5-error-log" class="error-log"></div>
+
+    <!-- Import your JS files -->
+    <script type="module" src="js/TensorFlow/Textarea-Read.js"></script>
+    <script type="module" src="js/TensorFlow/Blank-Canvas-Create.js"></script>
+    <script type="module" src="js/ML5/Generate-Rooms.js"></script>
+    <script type="module" src="js/script.js"></script>
+
+</body>
+</html>

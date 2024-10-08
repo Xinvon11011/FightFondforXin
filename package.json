@@ -1,22 +1,33 @@
 {
-    "name": "realxin-ai-floorplan-generator",
+    "name": "realxin-generative-app",
     "version": "1.0.0",
-    "description": "An AI-powered floorplan generator using TensorFlow.js and ML5.js.",
-    "main": "index.js",
+    "description": "RealXin Sparkling Generative App hosted on GitHub Pages",
+    "main": "index.html",
     "scripts": {
-      "start": "node index.js",
-      "build": "npm run build",  
-      "test": "npm run test"     
+      "start": "npm run serve",
+      "build": "npm run build",
+      "deploy": "gh-pages -d build"
     },
     "dependencies": {
-      "@tensorflow/tfjs": "^3.9.0",
-      "ml5": "^0.6.0",
-      "express": "^4.17.1" 
+      "@tensorflow/tfjs": "^4.0.0",
+      "ml5": "^0.6.0"
     },
     "devDependencies": {
-      "nodemon": "^2.0.7" 
+      "gh-pages": "^3.2.3"
     },
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/yourusername/realxin-generative-app.git"
+    },
+    "keywords": [
+      "AI",
+      "Generative",
+      "RealXin",
+      "Floorplan",
+      "ML5",
+      "TensorFlow"
+    ],
     "author": "Your Name",
-    "license": "MIT"
+    "license": "ISC"
   }
   

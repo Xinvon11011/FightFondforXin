@@ -1,0 +1,22 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*.so
+
+# Virtual environment
+venv/
+ENV/
+
+# Flask cache
+instance/
+*.log
+
+# Ignore .env or environment variable files (if you use them)
+.env
+
+# System files
+.DS_Store
+*.swp
+
+# Gunicorn log files
+gunicorn*log

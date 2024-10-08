@@ -1,0 +1,5 @@
+baseURL = "https://yourusername.github.io/realxin-generative-app/"
+languageCode = "en-us"
+title = "RealXin Sparkling Generative App"
+theme = "your-theme"
+publishDir = "docs"
